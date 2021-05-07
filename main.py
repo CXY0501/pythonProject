@@ -14,3 +14,17 @@ if __name__ == '__main__':
     print_hi('PyCharm')
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
+
+def add(a,b):
+    return a+b
+
+import schedule
+import time
+def job():
+    print('hahahaha')
+
+schedule.every(3).seconds.do(job)
+while True:
+    schedule.run_pending()
+    time.sleep(1)
+
