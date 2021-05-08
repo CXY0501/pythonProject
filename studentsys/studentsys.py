@@ -1,3 +1,4 @@
+filename = 'studentsys.txt'
 def menu():
     print('======================Student Management System================================')
     print('---------------------------Function Menu---------------------------------------')
@@ -9,6 +10,7 @@ def menu():
     print('\t\t\t\t\t\t6.Total Student Number')
     print('\t\t\t\t\t\t7.Show all Student Info')
     print('\t\t\t\t\t\t0.Log out System')
+    print('--------------------------------------------------------------------------------')
 
 def main():
     while True:
@@ -38,7 +40,46 @@ def main():
                 show()
 
 def insert():
-    pass
+    student_list = []
+    while True:
+        id = input('Please input Student No.(eg.1001):')
+        if not id:
+            break
+        name = input('Please input Student name:')
+        if not name:
+            break
+        try:
+            English = int(input('Please input English Score:'))
+            Python = int(input('Please input Python Score:'))
+            Java = int(input('Please input Java Score:'))
+        except:
+            print('Invalid Score, please input Int type')
+            continue
+
+        student = {'id':id,'name':name,'English':English,'Python':Python,'Java':Java}
+        student_list.append(student)
+
+        keepOnInput = input('Keep on Input another Student?y/n')
+
+        if keepOnInput == 'y':
+            continue
+        else:
+            break
+
+    print(student_list)
+
+    save(student_list)
+    print('Insert Student Info Completed')
+
+def save(list):
+    try:
+        student_file = open(filename,'a',encoding='UTF-8')
+    except:
+        student_file = open(filename,'w',encoding='UTF-8')
+    for item in list:
+        student_file.write(str(item)+'\n')
+    student_file.close()
+
 def search():
     pass
 def delete():
