@@ -85,10 +85,60 @@ def search():
     while True:
         print('Search by ID or Name? 1-ID 2-Name')
         SearchBy = int(input('Please input your choice'))
-        if SearchBy == 1:
-            pass
-        elif SearchBy == 2:
-            pass
+        if SearchBy:
+            if os.path.exists(filename):
+                with open(filename,'r',encoding='UTF-8') as sfile:
+                    student_list = sfile.readlines()
+            else:
+                student_list = []
+            # print(student_list)
+            d = []
+            flag = False
+            if student_list:
+                for item in student_list:
+                    d.append(dict(eval(item)))
+                print(d)
+
+                if SearchBy == 1:
+                    searchId = input('Please input the Student ID for search:')
+                    for item in d:
+                        if item['id'] == searchId:
+                            print('-------------------------------')
+                            print('Student Found:')
+                            print(item)
+                            flag = False
+                            break
+                        else:
+                            flag = True
+                            # break
+                    if flag:
+                        print('-------------------------------')
+                        print('Student Not Found')
+
+                elif SearchBy == 2:
+                    searchName = input('Please input the Student Name for search:')
+                    for item in d:
+                        if item['name'] == searchName:
+                            print('----------------------------------')
+                            print('Student Found:')
+                            print(item)
+                            flag = False
+                            break
+                        else:
+                            flag = True
+                            # break
+                    if flag:
+                        print('-------------------------------')
+                        print('Student Not Found')
+                else:
+                    print('Invalid Input, please try again')
+                    # break
+            else:
+                print('No any student info exsits')
+
+        keepOnSearch = input('Keep on searching? y/n')
+        if keepOnSearch == 'y':
+            continue
         else:
             break
 
