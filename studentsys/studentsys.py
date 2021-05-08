@@ -1,3 +1,4 @@
+import os
 filename = 'studentsys.txt'
 def menu():
     print('======================Student Management System================================')
@@ -59,7 +60,7 @@ def insert():
         student = {'id':id,'name':name,'English':English,'Python':Python,'Java':Java}
         student_list.append(student)
 
-        keepOnInput = input('Keep on Input another Student?y/n')
+        keepOnInput = input('Keep on Inputting another Student?y/n')
 
         if keepOnInput == 'y':
             continue
@@ -81,9 +82,51 @@ def save(list):
     student_file.close()
 
 def search():
-    pass
+    while True:
+        print('Search by ID or Name? 1-ID 2-Name')
+        SearchBy = int(input('Please input your choice'))
+        if SearchBy == 1:
+            pass
+        elif SearchBy == 2:
+            pass
+        else:
+            break
+
 def delete():
-    pass
+    while True:
+        delId = input('Please input the Student ID you want to delete:')
+        if delId:
+            if os.path.exists(filename):
+                with open(filename,'r',encoding='UTF-8') as file:
+                    student_old = file.readlines()
+            else:
+                student_old = []
+
+            flag = False
+
+            if student_old:
+                with open(filename,'w',encoding='UTF-8') as wfile:
+                    d = {}
+                    for item in student_old:
+                        d = dict(eval(item))
+                        if d['id'] != delId:
+                            wfile.write(str(d)+'\n')
+                        else:
+                            flag = True
+                    if flag:
+                        print(f'Student Id {delId} is deleted')
+                    else:
+                        print(f'Cannot find Student ID {delId}')
+            else:
+                print('No Student Info Found')
+                break
+
+        keepOnDel = input('Keep on deleting another Student? y/n')
+        if keepOnDel == 'y':
+            continue
+        else:
+            break
+
 def modify():
     pass
 def sort():
