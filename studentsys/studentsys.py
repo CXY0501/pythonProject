@@ -3,14 +3,14 @@ filename = 'studentsys.txt'
 def menu():
     print('======================Student Management System================================')
     print('---------------------------Function Menu---------------------------------------')
-    print('\t\t\t\t\t\t1.Insert Student Info')
-    print('\t\t\t\t\t\t2.Search Student Info')
-    print('\t\t\t\t\t\t3.Delete Student Info')
-    print('\t\t\t\t\t\t4.Modify Student Info')
-    print('\t\t\t\t\t\t5.Sort Student Scores')
-    print('\t\t\t\t\t\t6.Total Student Number')
-    print('\t\t\t\t\t\t7.Show all Student Info')
-    print('\t\t\t\t\t\t0.Log out System')
+    print('|                      1.Insert Student Info                                   |')
+    print('|                      2.Search Student Info                                   |')
+    print('|                      3.Delete Student Info                                   |')
+    print('|                      4.Modify Student Info                                   |')
+    print('|                      5.Sort Student Scores                                   |')
+    print('|                      6.Total Student Number                                  |')
+    print('|                      7.Show all Student Info                                 |')
+    print('|                      0.Log out System                                        |')
     print('--------------------------------------------------------------------------------')
 
 def main():
@@ -97,7 +97,7 @@ def search():
             if student_list:
                 for item in student_list:
                     d.append(dict(eval(item)))
-                print(d)
+                # print(d)
 
                 if SearchBy == 1:
                     searchId = input('Please input the Student ID for search:')
@@ -178,7 +178,46 @@ def delete():
             break
 
 def modify():
-    pass
+    while True:
+        modifyId = input('Please input the Student ID you want to modify:')
+        if modifyId:
+            if os.path.exists(filename):
+                with open(filename,'r',encoding='UTF-8') as file:
+                    student_old = file.readlines()
+            else:
+                student_old = []
+            d = []
+            flag = False
+            for item in student_old:
+                d.append(dict(eval(item)))
+            for item in d:
+                if item['id'] == modifyId:
+                    try:
+                        item['name'] = input('Please input the name:')
+                        item['Engligh'] = int(input('Please input the English Score:'))
+                        item['Python'] = int(input('Please input the Python Score:'))
+                        item['Java'] = int(input('Please input the Java Score:'))
+                        flag = False
+                        break
+                    except:
+                        print('Invalid Input, please try again')
+                        break
+                else:
+                    flag = True
+            if flag == True:
+                print(f'Student ID {modifyId} is not found')
+
+            with open(filename,'w',encoding='UTF-8') as mfile:
+                for item in d:
+                    mfile.write(str(item)+'\n')
+
+            keepOnModify = input('Keep on Modifing?y/n')
+            if keepOnModify == 'y':
+                continue
+            else:
+                break
+
+
 def sort():
     pass
 def total():
