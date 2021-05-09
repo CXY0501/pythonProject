@@ -1,4 +1,5 @@
 import os
+import keyboard
 filename = 'studentsys.txt'
 def menu():
     print('======================Student Management System================================')
@@ -211,11 +212,14 @@ def modify():
                 for item in d:
                     mfile.write(str(item)+'\n')
 
-            keepOnModify = input('Keep on Modifing?y/n')
-            if keepOnModify == 'y':
-                continue
-            else:
-                break
+        else:
+            print('Invalid input, please try again')
+
+        keepOnModify = input('Keep on Modifing?y/n')
+        if keepOnModify == 'y':
+            continue
+        else:
+            break
 
 
 def sort():
@@ -223,7 +227,26 @@ def sort():
 def total():
     pass
 def show():
-    pass
+    while True:
+        if os.path.exists(filename):
+            with open(filename,'r',encoding='UTF-8') as file:
+                student_all = file.readlines()
+        else:
+            student_all = []
+        d=[]
+        if student_all:
+            for item in student_all:
+                d.append(dict(eval(item)))
+            for item in d:
+                print(item)
+        else:
+            print('No Student Info Found')
+
+        # keyboard.write('The quick brown fox jumps over the lazy dog.')
+        goBackMenu = input('Input any key to Go back to the Main Menu')
+        if goBackMenu:
+            break
+
 
 if __name__ == '__main__':
     main()
