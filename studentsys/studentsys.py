@@ -223,9 +223,18 @@ def modify():
 
 
 def sort():
-    pass
+
+
 def total():
-    pass
+    if os.path.exists((filename)):
+        with open(filename,'r',encoding='UTF-8') as file:
+            student_total = file.readlines()
+    else:
+        student_total = []
+    print('The total number of students is:')
+    print(len(student_total))
+    goBackMenu = input('Input any key to Go back to the Main Menu')
+
 def show():
     while True:
         if os.path.exists(filename):
