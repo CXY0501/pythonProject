@@ -223,10 +223,55 @@ def modify():
 
 
 def sort():
+    while True:
+        if os.path.exists(filename):
+            with open(filename,'r',encoding='UTF-8') as file:
+                student_sort = file.readlines()
+        else:
+            student_sort = []
+        d = []
+        for item in student_sort:
+            d.append(dict(eval(item)))
 
+        for item in d:
+            item['Total Score'] = item['English'] + item['Python'] + item['Java']
+
+        sortType = int(input('Please choose sort type: 1. by Acsending 2. Decsending'))
+        sortBy = int(input('Please choose sort by: 1. English Score 2. Python Score 3. Java Score 0. Total Scores'))
+        if sortType == 1:
+            if sortBy == 1:
+                d.sort(key=lambda d:d['English'],reverse=False)
+            elif sortBy == 2:
+                d.sort(key=lambda d:d['Python'],reverse=False)
+            elif sortBy == 3:
+                d.sort(key=lambda d:d['Java'],reverse=False)
+            elif sortBy == 0:
+                d.sort(key=lambda d:d['Total Score'],reverse=False)
+            else:
+                print('Invalid input, please try again')
+        elif sortType == 2:
+            if sortBy == 1:
+                d.sort(key=lambda d:d['English'],reverse=True)
+            elif sortBy == 2:
+                d.sort(key=lambda d:d['Python'],reverse=True)
+            elif sortBy == 3:
+                d.sort(key=lambda d:d['Java'],reverse=True)
+            elif sortBy == 0:
+                d.sort(key=lambda d:d['Total Score'],reverse=True)
+            else:
+                print('Invalid input, please try again')
+
+        for item in d:
+            print(item)
+
+        keepOnSort = input('Keep on Sorting?y/n')
+        if keepOnSort == 'y':
+            continue
+        else:
+            break
 
 def total():
-    if os.path.exists((filename)):
+    if os.path.exists(filename):
         with open(filename,'r',encoding='UTF-8') as file:
             student_total = file.readlines()
     else:
