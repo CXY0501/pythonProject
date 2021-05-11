@@ -1,6 +1,6 @@
 import os
 import keyboard
-filename = 'studentsys.txt'
+filename = './studentsys.txt'
 def menu():
     print('======================Student Management System================================')
     print('---------------------------Function Menu---------------------------------------')
