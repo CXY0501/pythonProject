@@ -13,7 +13,7 @@ def read_loginInfo():
         while True:
             line = file.readline()
             if line:
-                print(line)
+                print(line,end='')
             else:
                 break
 
