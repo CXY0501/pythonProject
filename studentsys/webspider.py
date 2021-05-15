@@ -5,3 +5,6 @@ html = response.read()
 with open('cat1000_1000.jpg','wb') as file:
     file.write(html)
 
+print(response.geturl())
+print(response.info())
+print(response.getcode())
